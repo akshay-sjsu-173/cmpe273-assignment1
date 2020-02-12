@@ -1,9 +1,7 @@
-# Assignment 1 - Part A
+# TCP - Multiple Client Connections
 
-You will be building a simple TCP server that can handle requests from multiple TCP clients. The given baseline implementation does not support handling connection from multiple clients.
-
-## Requirements
-
-* Add handling connection from the multiple clients and the server must be kept running forever.
-* Print out the data received by the server along with client id.
-* Response all clients to the "pong" message.
+- TCP server starts accepting connections on published port (port #5000 used in the code)
+- Client connects with server on published port and waits for acknowledgement ("pong" message)
+- Server can handle multiple connections on the same port as each established connection has a
+  unique combination of SOURCE_IP, SOURCE_PORT. 
+- The same client can conenct to the server multiple times as long as it generates a unique SOURCE_PORT
