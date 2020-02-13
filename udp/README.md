@@ -1,11 +1,9 @@
-# Assignment 1 - Part B
+# UDP - Packet Loss Detection
 
-You will be adding package lost detection and reliable message delivery to UDP.
-
-# Requirements
-
-* Implement a simple acknowledgement protocol that you assign unique sequence id for each package you send to the server.
-* Once the package is received by the server, the server will send acknowledgement back to the client.
-* In case of package lost, the client did not receive the acknowledgement back from the server, the client must resend the same package again until you get the acknowledgement.
-* To control the package order, the client will never send the next package until it gets the acknowledegement for the previous one.
-
+- UDP server starts accepting connections on published port (port #4000 used in the code)
+- Client starts sending messages to the servers published port
+- Client waits for server acknowledgement before sending next message
+- Client resends the message if server does not respond with ACK in X secs. This is packet loss.
+- Client performs server reconnect N times before terminating the application.
+- If the server starts accepting connections before the Nth retry, client starts sending messages
+  from the last pending message id. 
