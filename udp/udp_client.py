@@ -22,7 +22,8 @@ def sendMessage(s=None):
     try:
         if not s:
             s = getNewConnection() #socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        server_ack = True
+            print("Connected to server. Starting file upload")
+        #server_ack = True
         with open('upload.txt','r') as currFile:
             message = currFile.readline() #Read first line in file 
             message_state = [message,5] #(message, re-connect count)
@@ -33,7 +34,7 @@ def sendMessage(s=None):
                 s.sendto(str(message).encode(), (UDP_IP, UDP_PORT))
                 try:
                     data, ip = func_timeout(wait_time,s.recvfrom,(BUFFER_SIZE,))
-                    print(data.decode().strip())
+                    print("Received acknowledgement : "+data.decode().strip())
                     message = currFile.readline() #Read next line if server ack received
                 except:
                     print("Server did not respond in ",wait_time," secs. Resending package --> ", message_state)
